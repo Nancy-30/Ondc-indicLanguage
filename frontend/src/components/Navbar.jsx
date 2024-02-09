@@ -11,11 +11,12 @@ export default function Navbar() {
   useEffect(() => {
     async function fetchInitialProducts() {
       try {
-        const initialProducts = // products ka list yaha hona chahiye
+        const response = await axios.post('/api/translate-products'); // Use Axios to fetch data
+        const initialProducts = response.data; // Extract data from response
         setProducts(initialProducts);
       } catch (error) {
         console.error('Error fetching initial products:', error);
-        // error message to the user
+        // Display an error message to the user
       }
     }
     fetchInitialProducts();

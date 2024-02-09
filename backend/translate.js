@@ -87,4 +87,4 @@ const productData = [
 
 translateProducts(language, productData)
 
-module.export = translateProducts;
+module.exports = translateProducts;
