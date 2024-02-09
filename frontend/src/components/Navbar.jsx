@@ -1,46 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
-// import { translateProducts } from './index';
 import Product from './Product';
+
 
 export default function Navbar() {
   const [isClicked, setIsClicked] = useState(false);
   const [language, setLanguage] = useState('English');
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    async function fetchInitialProducts() {
-      try {
-        const response = await axios.post('/api/translate-products'); // Use Axios to fetch data
-        const initialProducts = response.data; // Extract data from response
-        setProducts(initialProducts);
-      } catch (error) {
-        console.error('Error fetching initial products:', error);
-        // Display an error message to the user
-      }
-    }
-    fetchInitialProducts();
-  }, []);
-
+  
   const handleLanguage = (lan) => {
     setLanguage(lan);
   };
 
-  // const handleClick = async () => {
-  //   setIsClicked(!isClicked);
-  //   if (!isClicked) {
-  //     try {
-  //       const translatedProducts = await Promise.all(products.map(async (product) => {
-  //         const translatedProduct = await translateProducts(language, product);
-  //         return translatedProduct;
-  //       }));
-  //       setProducts(translatedProducts);
-  //     } catch (error) {
-  //       console.error('Error translating products:', error);
-  //       // Display an error message to the user
-  //     }
-  //   }
-  // };
+  const handleClick = async () => {
+    setIsClicked(!isClicked);
+
+  };
 
   return (
     <div className='flex p-3 bg-blue-950 text-white justify-between px-12'>
@@ -49,7 +23,7 @@ export default function Navbar() {
         <input type='text' placeholder='search' className='w-[500px] p-1 rounded-sm' />
       </form>
       <div>
-        <button className='flex items-center gap-1'>
+        <button className='flex items-center gap-1' onClick={handleClick}>
           {language} <FaChevronDown />
         </button>
         {isClicked && (
@@ -67,21 +41,23 @@ export default function Navbar() {
               मराठी - Marathi
             </li>
             <li className='cursor-pointer hover:text-yellow-600' onClick={() => handleLanguage('Kannada')}>
-                ಕನ್ನಡ - Kannada
+              ಕನ್ನಡ - Kannada
             </li>
             <li className='cursor-pointer hover:text-yellow-600' onClick={() => handleLanguage('Tamil')}>
-                தமிழ் - Tamil
+              தமிழ் - Tamil
             </li>
             <li className='cursor-pointer hover:text-yellow-600' onClick={() => handleLanguage('Malayalam')}>
-                മലയാളം - Malayalam
+              മലയാളം - Malayalam
             </li>
           </div>
         )}
       </div>
-      {/* Display translated products */}
-      {products.map((product) => (
+
+      {/* {products.map((product) => (
         <Product key={product.heading} product={product} />
-      ))}
+      ))} */}
+
+    <Product language ={language}/>
     </div>
   );
 }
