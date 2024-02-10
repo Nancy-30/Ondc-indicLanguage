@@ -6,7 +6,7 @@ import Product from './Product';
 export default function Navbar() {
   const [isClicked, setIsClicked] = useState(false);
   const [language, setLanguage] = useState('English');
-  
+
   const handleLanguage = (lan) => {
     setLanguage(lan);
   };
@@ -27,7 +27,7 @@ export default function Navbar() {
           {language} <FaChevronDown />
         </button>
         {isClicked && (
-          <div className='absolute bg-gray-200 text-black p-4 px-8 right-6 top-14 flex flex-col gap-2'>
+          <div className='absolute bg-gray-200 text-black p-4 px-8 right-6 top-14 flex flex-col gap-2 z-[101]'>
             <li
               className='cursor-pointer hover:text-yellow-600'
               onClick={() => handleLanguage('English')}
@@ -49,15 +49,14 @@ export default function Navbar() {
             <li className='cursor-pointer hover:text-yellow-600' onClick={() => handleLanguage('Malayalam')}>
               മലയാളം - Malayalam
             </li>
+
+
+            <button className='bg-yellow-600 p-2 mt-4 font-semibold hover:bg-yellow-500 text-white' onClick={handleClick}>Save</button>
           </div>
         )}
       </div>
 
-      {/* {products.map((product) => (
-        <Product key={product.heading} product={product} />
-      ))} */}
-
-    <Product language ={language}/>
+      <Product language={language} />
     </div>
   );
 }
